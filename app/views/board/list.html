@@ -1,4 +1,4 @@
-<table class="table table-hover" ng-controller="ListCtrl">
+<table class="table table-hover">
   <thead>
   <tr>
     <th style="width:10%;">#</th>
@@ -8,23 +8,11 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td>1</td>
-    <td>Mark</td>
-    <td>Otto</td>
-    <td>2015.01.01</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Jacob</td>
-    <td>Thornton</td>
-    <td>2015.01.01</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>Larry</td>
-    <td>the Bird</td>
-    <td>2015.01.01</td>
+  <tr ng-repeat="article in articleList">
+    <td>{{$index + 1}}</td>
+    <td>{{article.title}}</td>
+    <td>{{article.writer}}</td>
+    <td>{{article.regdate}}</td>
   </tr>
   </tbody>
 </table>
@@ -32,19 +20,19 @@
 <form class="form-horizontal" role="form">
   <div class="form-group">
     <div class="col-xs-4 col-sm-2">
-      <select class="form-control col-lg-2">
-        <option>제목</option>
-        <option>작성자</option>
+      <select class="form-control col-lg-2" ng-model="search.type">
+        <option value="title">제목</option>
+        <option value="writer">작성자</option>
       </select>
     </div>
 
     <label class="sr-only" for="iptSearchText">Searh text</label>
     <div class="col-xs-8 col-sm-7">
-      <input type="text" class="form-control" id="iptSearchText">
+      <input type="text" class="form-control" id="iptSearchText" ng-model="search.text">
     </div>
 
     <div class="col-sm-3">
-      <button type="submit" class="btn btn-default">검색</button>
+      <button type="submit" class="btn btn-default" ng-click="search.search()">검색</button>
     </div>
   </div>
 </form>

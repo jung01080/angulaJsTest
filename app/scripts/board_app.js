@@ -8,15 +8,18 @@
  *
  * Main module of the application.
  */
-angular
-  .module('boardApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
-  ])
+
+var mdBoardApp = angular
+                  .module('boardApp', [
+                    'ngAnimate',
+                    'ngCookies',
+                    'ngResource',
+                    'ngRoute',
+                    'ngSanitize',
+                    'ngTouch'
+                  ]);
+
+mdBoardApp
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -26,11 +29,15 @@ angular
       .when('/write', {
         templateUrl: '../../views/board/write.html',
         controller: 'WriteCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
       });
-  })
-  .controller('BoardController', function($scope){
-    $scope.activeSideMenu = 'list';
   });
+
+mdBoardApp
+  .controller('BoardController', ['$scope', '$location', '$http', function($scope, $location, $http){
+    $scope.activeSideMenu = $location.path().toLowerCase().replace('/', '') || 'list';
+  }]);
+
+
+(function(){
+  window.testApp.board = {};
+})();
